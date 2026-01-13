@@ -66,3 +66,28 @@ class Task(Base):
         "Project",
         back_populates="tasks",
     )
+
+    requirement_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True),
+        ForeignKey("requirements.id"),
+        nullable=False,
+    )
+
+    # Relationships
+
+    project = relationship(
+        "Project",
+        back_populates="tasks",
+    )
+
+    assigned_to = relationship(
+        "User",
+        back_populates="tasks",
+        foreign_keys=[assigned_user_id],
+    )
+
+    requirements = relationship(
+        "Requirement",
+        back_populates="tasks",
+    )
+

@@ -49,6 +49,12 @@ class Project(Base):
     # Relationship to Tasks
     tasks = relationship(
         "Task",
-        back_populates="project",
+        back_populates="projects",
         cascade="all, delete-orphan",
+    )
+    # Relationship to Requirements
+    requirements = relationship(
+        "Requirement",
+        back_populates="projects",
+        cascade="all, delete-orphan"
     )

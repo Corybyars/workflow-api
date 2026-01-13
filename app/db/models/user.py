@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import String, Boolean, Enum
+from sqlalchemy import Boolean, Column, String, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -28,11 +28,12 @@ class User(Base):
         nullable=False,
     )
 
-    role: Mapped[Role] = mapped_column(
-        Enum(Role, name="role_enum"),
-        nullable=False,
-        default=Role.DEVELOPER,
+    role = relationship(
+        "Role",
+        backref="users",
     )
+
+    role_id = Column(ForeignKey("roles.id"), nullable=False)
 
     is_active: Mapped[bool] = mapped_column(
         Boolean,
@@ -48,4 +49,16 @@ class User(Base):
     projects = relationship(
         "Project",
         back_populates="owner",
+    )
+
+    requirements_created = relationship(
+        "Requirement",
+        back_populates="created_by",
+        foreign_keys="Requirement.created_by_id",
+    )
+
+    requirements_assigned = relationship(
+        "Requirement",
+        back_populates="assigned_to",
+        foreign_keys="Requirement.assigned_to_id",
     )
