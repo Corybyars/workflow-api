@@ -1,10 +1,11 @@
 import uuid
 from sqlalchemy import String, Boolean, Enum
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 from app.db.models.role import Role
+
 
 class User(Base):
     __tablename__ = "users"
@@ -37,4 +38,14 @@ class User(Base):
         Boolean,
         nullable=False,
         default=True,
+    )
+
+    tasks = relationship(
+        "Task",
+        back_populates="assigned_user",
+    )
+
+    projects = relationship(
+        "Project",
+        back_populates="owner",
     )
