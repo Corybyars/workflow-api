@@ -1,2 +1,2 @@
 # workflow-api
-This is a backend workflow and requirements management api
+A requirements gathering tool designed to simplify and organize the project discovery phase.
