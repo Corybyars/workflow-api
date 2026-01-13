@@ -1,6 +1,7 @@
 from enum import Enum as PyEnum
 
 class Role(PyEnum):
-    DEVELOPER = "developer"
-    MANAGER = "manager"
-    ADMIN = "admin"
+    DEVELOPER = "Developer"
+    PM = "Project Manager"
+    BA = "Business Analyst"
+    STAKEHOLDER = "Stake Holder"
