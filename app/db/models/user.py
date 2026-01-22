@@ -5,6 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 from app.db.models.role import Role
+from app.db.models.project_member import ProjectMember
 
 
 class User(Base):
@@ -61,4 +62,10 @@ class User(Base):
         "Requirement",
         back_populates="assigned_to",
         foreign_keys="Requirement.assigned_to_id",
+    )
+
+    project_memberships: Mapped[list[ProjectMember]] = relationship(
+        "ProjectMember",
+        back_populates="user",
+        cascade="all, delete-orphan",
     )

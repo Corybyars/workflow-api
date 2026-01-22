@@ -6,6 +6,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from app.db.models.project_member import ProjectMember
 
 
 class Project(Base):
@@ -57,4 +58,10 @@ class Project(Base):
         "Requirement",
         back_populates="projects",
         cascade="all, delete-orphan"
+    )
+
+    members: Mapped[list[ProjectMember]] = relationship(
+        "ProjectMember",
+        back_populates="project",
+        cascade="all, delete-orphan",
     )

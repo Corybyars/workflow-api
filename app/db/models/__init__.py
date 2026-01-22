@@ -5,6 +5,7 @@ try:
     from app.db.models.task_status import TaskStatus
     from app.db.models.project import Project
     from .requirement import Requirement
+    from .project_member import ProjectMember
 except ModuleNotFoundError:
     from user import User
     from role import Role
@@ -12,6 +13,7 @@ except ModuleNotFoundError:
     from task_status import TaskStatus
     from project import Project
     from requirement import Requirement
+    from project_member import ProjectMember
 
 
 
